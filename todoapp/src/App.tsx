@@ -1,15 +1,7 @@
 import React from 'react';
-import { Container } from '@mui/material';
-import { styled } from '@mui/system';
 import type { Task } from './types/task'
-import { TodoList } from './components/TodoList'
-
-const StyledContainer = styled(Container)({
-    width: '80%',
-    margin: '50px auto',
-    padding: '20px',
-    boxShadow: '0 4px 8px #ccc',
-})
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { TodoListPage } from './pages/TodoListPage';
 
 export const App: React.FC = () => {
     const data: Task[] = [
@@ -30,10 +22,11 @@ export const App: React.FC = () => {
     ]
 
     return (
-        <StyledContainer maxWidth="sm">
-            {data.map((item, index) => (
-            <TodoList {...item} index={index}/>
-            ))}
-        </StyledContainer>
+        <Router>
+            <Routes>
+                <Route path="/todos" element={<TodoListPage data={data} />} />
+                {/* 他のルートもここに追加 */}
+            </Routes>
+        </Router>
     )
 }
