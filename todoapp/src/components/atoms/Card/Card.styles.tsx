@@ -6,7 +6,7 @@ export const TodoItemCard = styled(Card)({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '10px 0',
+    padding: '10px',
     border: '2px solid #ddd',
     borderRadius: 10,
 });

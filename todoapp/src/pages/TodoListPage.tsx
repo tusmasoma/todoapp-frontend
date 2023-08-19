@@ -23,8 +23,8 @@ export const TodoListPage:React.FC = () => {
     ]
     return (
         <TodoListContainer maxWidth="sm">
-            {data.map((item, index) => (
-            <TodoItem key={item.id} {...item} index={index}/>
+            {data.map( item => (
+            <TodoItem key={item.id} {...item}/>
             ))}
         </TodoListContainer>    
     )

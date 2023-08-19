@@ -1,19 +1,19 @@
 import React from 'react';
 import type { Task } from '../../../types/task';
-import { StyledButton } from '../../atoms/Button/Button.styles';
+import { DeleteButton } from '../../atoms/Button/Button.styles';
 import { TodoItemCard } from '../../atoms/Card/Card.styles';
-import { StyledTypography} from '../../atoms/Typography/Typography.styles';
+import { TodoTitle } from '../../atoms/Typography/Typography.styles';
 
-export const TodoItem: React.FC<Task & { index: number }> = ({ title }) => {
+export const TodoItem: React.FC<Task> = ({ title }) => {
 
     return (
         <TodoItemCard>
-            <StyledTypography>
+            <TodoTitle>
                 {title}
-            </StyledTypography>
-            <StyledButton>
+            </TodoTitle>
+            <DeleteButton>
                 削除
-            </StyledButton>
+            </DeleteButton>
         </TodoItemCard>    
     )
 }
