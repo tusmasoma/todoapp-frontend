@@ -11,5 +11,5 @@ export const TodoListContainer = styled(Container)({
     boxShadow: '0 4px 8px #ccc',
     position: 'relative',
     top: '50%',
-    transform: 'translateY(30%)',
+    transform: 'translateY(50px)',
 })

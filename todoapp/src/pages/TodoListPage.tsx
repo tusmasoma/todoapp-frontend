@@ -39,7 +39,7 @@ export const TodoListPage:React.FC = () => {
             <SearchForm />
             {TodoList ? 
             <>
-                {TodoList.map( item => (<TodoItem key={item.id} {...item} />))}
+                {TodoList.map( (item,index) => (<TodoItem key={item.id} {...item} onClick={() => {openDetailModal(index)}} />))}
                 <DetailDialog {...TodoList[isDetailOpen.id]} open={isDetailOpen.isopen} onClose={closeDetailModal}/>
             </>
             :
