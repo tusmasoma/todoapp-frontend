@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@mui/material';
-import { TodoTitleProps } from '../../../types/task';
+import { TodoTitleProps } from '../../../types/types';
 
 export const TodoTitle: React.FC<TodoTitleProps> = ({ title }) => {
     return (
