@@ -8,12 +8,8 @@ export const TodoItem: React.FC<Task> = ({ title }) => {
 
     return (
         <TodoItemCard>
-            <TodoTitle>
-                {title}
-            </TodoTitle>
-            <DeleteButton>
-                削除
-            </DeleteButton>
+            <TodoTitle title={title}/>
+            <DeleteButton/>
         </TodoItemCard>    
     )
 }

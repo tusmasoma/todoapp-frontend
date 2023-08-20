@@ -1,15 +1,23 @@
-
+import React from 'react';
 import { Button } from '@mui/material';
-import { styled } from '@mui/system';
 
-
-export const DeleteButton = styled(Button)({
-    padding: '5px 10px',
-    backgroundColor: '#ddd',
-    color: '#fff',
-    borderRadius: 5,
-    cursor: 'pointer',
-    '&:hover': {
-        backgroundColor: '#a7a6a6',
-    },
-});
+export const DeleteButton: React.FC = () => {
+    return (
+        <Button
+        sx={
+            {
+                padding: '5px 10px',
+                backgroundColor: '#ddd',
+                color: '#fff',
+                borderRadius: 2.5,
+                cursor: 'pointer',
+                '&:hover': {
+                    backgroundColor: '#a7a6a6',
+                },
+            }
+        }
+        >
+            削除
+        </Button>    
+    )
+}
