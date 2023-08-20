@@ -7,6 +7,18 @@ export type Task = {
     formatted_created_at: string
 }
 
+export type MatchParams = {
+    id: string;
+}
+
 export type TodoTitleProps = {
     title: string;
+}
+
+export type TodoCreateAtProps = {
+    createdAt: string
+}
+
+export type TodoContentProps = {
+    content: string
 }

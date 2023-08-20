@@ -8,3 +8,11 @@ export const SearchFormPaper = styled(Paper)({
     padding: '2px 4px',
     alignItems: 'center',
 })
+
+export const TodoDetailPaper = styled(Paper)({
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '20px',
+    padding: '20px',
+    minHeight: '400px',
+})
