@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Task } from '../types/task';
-import { TodoListContainer } from "../components/atoms/Container/Container.styles"
+import { TodoListContainer } from '../components/atoms/Container/TodoListContainer';
 import { TodoItem } from "../components/molecules/TodoItem/TodoItem"
 
 

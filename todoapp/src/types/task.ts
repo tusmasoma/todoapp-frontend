@@ -6,7 +6,3 @@ export type Task = {
     created_at: string
     formatted_created_at: string
 }
-
-export type TodoTitleProps = {
-    title: string;
-}
