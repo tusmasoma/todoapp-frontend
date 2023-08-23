@@ -1,5 +1,4 @@
 import React from 'react';
-import type { Task } from './types/task'
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { TodoListPage } from './pages/TodoListPage';
 
