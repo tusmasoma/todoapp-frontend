@@ -1,11 +1,11 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 
-export type TodoContentProps = {
+export type Props = {
     content: string
 }
 
-export const TodoDetailContent: React.FC<TodoContentProps> = ({ content }) => {
+export const TodoDetailContent: React.FC<Props> = ({ content }) => {
     return (
         <Typography
         sx={

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 
-type TodoCreateAtProps = {
+type Props = {
     createdAt: string
 }
 
-export const CreatedAt: React.FC<TodoCreateAtProps> = ({ createdAt }) => {
+export const CreatedAt: React.FC<Props> = ({ createdAt }) => {
     return (
         <Typography
             sx={

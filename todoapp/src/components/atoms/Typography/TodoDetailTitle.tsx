@@ -1,11 +1,11 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 
-type TodoTitleProps = {
+type Props = {
     title: string;
 }
 
-export const TodoDetailTitle: React.FC<TodoTitleProps> = ({ title }) => {
+export const TodoDetailTitle: React.FC<Props> = ({ title }) => {
     return (
         <Typography
             sx={
