@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@mui/material';
 
-export const EditButton: React.FC = () => {
+export const EditButton: React.FC<{openModal: () => void;}> = ({ openModal }) => {
     return (
         <Button
         sx={
@@ -16,6 +16,7 @@ export const EditButton: React.FC = () => {
                 },
             }
         }
+        onClick={openModal}
         >
             編集
         </Button>    
