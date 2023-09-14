@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import { Task } from '../types/task';
+import { Task } from '@types/task';
 
 export const getTaskBy = async (id:string) => {
     try {

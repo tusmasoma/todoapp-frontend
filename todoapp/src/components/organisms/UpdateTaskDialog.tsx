@@ -1,46 +1,55 @@
 import React, { useState } from 'react';
-import { Task } from '../../types/task';
-import { updateTask } from '../../apis/updateTask'
-import { CancelUpdateButton } from '../atoms/Button/CancelUpdateButton';
-import { ConfirmUpdateButton } from '../atoms/Button/ConfirmUpdateButton';
-import { TitleEditField } from '../atoms/TextField/TitleEditField';
-import { DescriptionEditField } from '../atoms/TextField/DescriptionEditField';
-import { UpdateDialogTitle } from '../atoms/DialogTitle/UpdateDialogTitle';
-import { UpdateDialogContent } from '../atoms/DialogContent/UpdateDialogContent';
-import { UpdateDialogActions } from '../atoms/DialogActions/UpdateDialogActions';
-import { UpdateDialog } from '../atoms/Dialog/UpdateDialog';
+import { Task } from '@types/task';
+import { updateTask } from 'src/apis/updateTask';
+import { CancelUpdateButton } from 'src/components/atoms/Button/CancelUpdateButton'; 
+import { ConfirmUpdateButton } from 'src/components/atoms/Button/ConfirmUpdateButton';
+import { TitleEditField } from 'src/components/atoms/TextField/TitleEditField';
+import { DescriptionEditField } from 'src/components/atoms/TextField/DescriptionEditField';
+import { DialogTitle } from 'src/components/atoms/DialogTitle/DialogTitle';
+import { DialogContent } from 'src/components/atoms/DialogContent/DialogContent';
+import { DialogActions } from 'src/components/atoms/DialogActions/DialogActions';
+import { Dialog } from 'src/components/atoms/Dialog/Dialog'  
 
-type Props = Task & {
-    open: boolean;
+type Props = {
+    task: Task; // Taskの全ての属性を持つtaskオブジェクト
+    isOpen: boolean;
     onClose: () => void;
-    setUpdateTrigger: (bool: boolean) => void
+    onTaskUpdated: () => void; // タスクが更新されたときのコールバック
 }
 
-export const UpdateTaskDialog: React.FC<Props> = ({ id, title, description, open, onClose, setUpdateTrigger }) => {
+export const TaskUpdateDialog: React.FC<Props> = ({ task, isOpen, onClose, onTaskUpdated }) => {
 
-    const [editedTitle, setEditedTitle] = useState<string>(title);
-    const [editedDescription, setEditedDescription] = useState<string>(description);
+    const { id, initialTitle, initialDescription } = task;
 
-    const handleUpdate = () => {
+    const [title, setTitle] = useState<string>(initialTitle);
+    const [description, setDescription] = useState<string>(initialDescription);
+
+    const update = () => {
         updateTask(id, {
-            title: editedTitle,
-            description: editedDescription,
-        });
-        onClose();
-        setUpdateTrigger(true);
+            title: title,
+            description: description,
+        })
+        .then(() => {
+            onClose();
+            onTaskUpdated();
+        })
+        .catch( err => {
+            console.error("Failed to update task:", err);
+            // 必要に応じて、ユーザーへのエラーメッセージの表示や、エラー時の処理を追加する
+        })
     }
 
     return (
-        <UpdateDialog open={open} onClose={onClose}>
-            <UpdateDialogContent>
-                <UpdateDialogTitle title='タスクを編集' />
-                <TitleEditField value={editedTitle} onChange={setEditedTitle} />
-                <DescriptionEditField value={editedDescription} onChange={setEditedDescription} />
-            </UpdateDialogContent>
-            <UpdateDialogActions>
+        <Dialog open={isOpen} onClose={onClose}>
+            <DialogContent>
+                <DialogTitle title='タスクを編集' />
+                <TitleEditField value={title} onChange={setTitle} />
+                <DescriptionEditField value={description} onChange={setDescription} />
+            </DialogContent>
+            <DialogActions>
                 <CancelUpdateButton onClick={onClose} />
-                <ConfirmUpdateButton onClick={handleUpdate} disabled={!editedTitle.trim() || !editedDescription.trim()}/>
-            </UpdateDialogActions>
-        </UpdateDialog>
+                <ConfirmUpdateButton onClick={update} disabled={!title.trim() || !description.trim()}/>
+            </DialogActions>
+        </Dialog>
     )
 }
