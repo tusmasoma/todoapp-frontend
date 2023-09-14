@@ -18,7 +18,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./",  // プロジェクトのルートを基点として指定
+    "paths": {
+      "@types/*": ["src/types/*"]  // Webpackのエイリアスと同じパスを指定
+    }
   },
   "include": [
     "src"

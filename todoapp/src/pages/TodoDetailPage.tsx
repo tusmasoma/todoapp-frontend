@@ -1,15 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { Typography, Stack, Container, Paper } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { Task } from "../types/task";
-import { getTaskBy } from "../apis/getTaskById";
-import { TodoDetailContainer } from "../components/atoms/Container/TodoDetailContainer";
-import { TodoDetailPaper } from "../components/atoms/Paper/TodoDetailPaper";
-import { DetailHeader } from "../components/atoms/Box/DetailHeader";
-import { TodoDetailTitle } from "../components/atoms/Typography/TodoDetailTitle";
-import { CreatedAt } from "../components/atoms/Typography/CreatedAt";
-import { TodoDetailContent } from "../components/atoms/Typography/TodoDetailContent";
-import { EditButton } from "../components/atoms/Button/EditButton";
+import { Task } from "@types/task";
+import { getTaskBy } from "src/apis/getTaskById";
+import { EditButton } from "src/components/atoms/Button/EditButton";
+import { TaskUpdateDialog } from "src/components/organisms/UpdateTaskDialog";
+import { useModal } from "src/hooks/useModal";
 
 type Params = {
     id: string;
@@ -19,7 +16,7 @@ export const TodoDetailPage: React.FC = () => {
 
     const { id } = useParams<Params>();
 
-    const [TodoData, setTodoData] = useState<Task | null>(null);
+    const [todoData, setTodoData] = useState<Task | undefined>();
 
     const fetchData = async () => {
         try {
@@ -39,21 +36,38 @@ export const TodoDetailPage: React.FC = () => {
         fetchData();
     }, []);
 
+    const { isOpen, open, close } = useModal();
 
     return (
-        <TodoDetailContainer maxWidth="sm">
-            {TodoData ?
-                <TodoDetailPaper>
-                    <DetailHeader>
-                        <TodoDetailTitle title={TodoData.title} />
-                        <EditButton />
-                    </DetailHeader>
-                    <CreatedAt createdAt={TodoData.formatted_created_at} />
-                    <TodoDetailContent content={TodoData.description} />
-                </TodoDetailPaper>
+        <Container
+            maxWidth="sm"
+            sx={{
+                width: '80%',
+                position: 'relative',
+                top: '50%',
+                transform: 'translateY(50px)',
+            }}>
+            {todoData ?
+                <>
+                    <Paper sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '20px',
+                        padding: '20px',
+                        minHeight: '400px',
+                    }}>
+                        <Stack sx={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                            <Typography sx={{ fontSize: '2rem', cursor: 'pointer' }}>{todoData.title}</Typography>
+                            <EditButton openModal={open} />
+                        </Stack>
+                        <Typography sx={{ color: '#a7a6a6' }}>作成日時:{todoData.formatted_created_at}</Typography>
+                        <Typography sx={{ whiteSpace: "pre-line" }}>{todoData.description}</Typography>
+                    </Paper>
+                    <TaskUpdateDialog task={todoData} isOpen={isOpen} onClose={close} onTaskUpdated={fetchData} />
+                </>
                 : (
                     <p>loading</p>
                 )}
-        </TodoDetailContainer>
+        </Container>
     )
 }

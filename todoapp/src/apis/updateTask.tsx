@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Task } from '../types/task';
+import { Task } from '@types/task';
 
 export const updateTask = async (id:string, updatedTask: Task) => {
     try {
