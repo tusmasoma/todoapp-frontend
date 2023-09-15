@@ -14,10 +14,8 @@ export const TitleEditField: React.FC<Props> = ({ value, onChange }) => {
             variant="outlined"
             fullWidth
             value={value}
-            onChange={(e) => {
-                if (e.target.value.trim() !== ""){
-                    onChange(e.target.value)
-                }
+            onChange={ e => {
+                onChange(e.target.value)
             }}
         />
     )

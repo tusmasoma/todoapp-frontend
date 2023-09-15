@@ -16,11 +16,9 @@ export const DescriptionEditField: React.FC<Props> = ({ value, onChange }) => {
             multiline
             rows={4}
             value={value}
-            onChange={(e) => {
-                if (e.target.value.trim() !== ""){
-                    onChange(e.target.value)
-                }
-            }}
+            onChange={ e => 
+                onChange(e.target.value)
+            }
         />
     )
 }
